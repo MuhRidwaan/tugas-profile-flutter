@@ -25,8 +25,7 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
 
     _controller = VideoPlayerController.asset(
       'assets/videos/video_perkenalan.mp4',
-    )
-      ..initialize().then((_) {
+    )..initialize().then((_) {
         setState(() {});
         _controller.setLooping(true); // 🔥 biar looping
 
@@ -51,8 +50,7 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
   // 🔥 PICK IMAGE
   Future<void> _pickImage(ImageSource source) async {
     try {
-      final XFile? pickedFile =
-          await _picker.pickImage(source: source);
+      final XFile? pickedFile = await _picker.pickImage(source: source);
 
       if (pickedFile != null) {
         setState(() => _imageFile = File(pickedFile.path));
@@ -110,11 +108,12 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.blue.shade900, Colors.blue.shade50],
+            colors: [Color(0xFF2E7D32), Color(0xFF00695C), Color(0xFFE8F5E9)],
+            stops: [0.0, 0.5, 1.0],
           ),
         ),
         child: SingleChildScrollView(
@@ -146,7 +145,7 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
                           backgroundColor: Colors.white,
                           radius: 20,
                           child: Icon(Icons.edit,
-                              color: Colors.blue, size: 20),
+                              color: Color(0xFF2E7D32), size: 20),
                         ),
                       ),
                     ),
@@ -186,8 +185,8 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
                         _infoRow(Icons.school, 'Status',
                             'Mahasiswa Teknik Informatika'),
                         const Divider(),
-                        _infoRow(Icons.email, 'Email',
-                            'mridwan07072002@gmail.com'),
+                        _infoRow(
+                            Icons.email, 'Email', 'mridwan07072002@gmail.com'),
                       ],
                     ),
                   ),
@@ -228,17 +227,16 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
   Widget _infoRow(IconData icon, String label, String value) {
     return Row(
       children: [
-        Icon(icon, color: Colors.blue.shade700),
+        Icon(icon, color: const Color(0xFF00695C)),
         const SizedBox(width: 15),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(label,
-                style:
-                    const TextStyle(fontSize: 12, color: Colors.grey)),
+                style: const TextStyle(fontSize: 12, color: Colors.grey)),
             Text(value,
-                style: const TextStyle(
-                    fontSize: 15, fontWeight: FontWeight.w600)),
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
           ],
         ),
       ],
@@ -270,7 +268,6 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
             alignment: Alignment.center,
             children: [
               VideoPlayer(_controller),
-
               GestureDetector(
                 onTap: () {
                   setState(() => _showOverlay = !_showOverlay);
