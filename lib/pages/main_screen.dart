@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'explore_page.dart';
-import 'home_page.dart';
+import 'profile_list.dart';
 import 'quiz_poll/quiz_poll_page.dart';
 import 'settings_page.dart';
 
@@ -16,7 +16,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    HomePage(),
+    const ProfileList(),
     const ExplorePage(),
     const QuizPollPage(),
     const SettingsPage(),

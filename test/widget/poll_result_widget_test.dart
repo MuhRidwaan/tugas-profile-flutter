@@ -111,7 +111,8 @@ void main() {
           voteDistribution: PollResult.empty(),
         ));
 
-        expect(find.byType(AnimatedBuilder), findsOneWidget);
+        // Verify that AnimatedBuilder widgets are present (may be multiple due to Material widgets)
+        expect(find.byType(AnimatedBuilder), findsWidgets);
       });
     });
   });

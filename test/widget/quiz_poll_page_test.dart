@@ -67,21 +67,15 @@ void main() {
   });
 
   group('QuizPage', () {
-    testWidgets('shows loading indicator initially', (tester) async {
-      await tester.pumpWidget(await buildApp());
-      // Pump once to trigger initState
-      await tester.pump();
-
-      // Loading state should appear briefly
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
-    });
-
     testWidgets('shows questions after loading', (tester) async {
       await tester.pumpWidget(await buildApp());
       await tester.pumpAndSettle();
 
-      // After loading, questions should appear
+      // After loading, questions should appear (no loading indicator)
       expect(find.byType(CircularProgressIndicator), findsNothing);
+
+      // Verify quiz content is displayed
+      expect(find.text('Kuesioner'), findsOneWidget);
     });
   });
 

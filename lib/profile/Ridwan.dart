@@ -54,7 +54,9 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
 
       if (pickedFile != null) {
         setState(() => _imageFile = File(pickedFile.path));
-        Navigator.pop(context);
+        if (mounted) {
+          Navigator.pop(context);
+        }
       }
     } catch (e) {
       debugPrint("Error ambil gambar: $e");
@@ -66,9 +68,11 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
     final Uri uri = Uri.parse(url);
 
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Gagal membuka link")),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Gagal membuka link")),
+        );
+      }
     }
   }
 
@@ -150,7 +154,7 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
                       ),
                     ),
                   ],
-                ), 
+                ),
               ),
 
               const SizedBox(height: 20),
