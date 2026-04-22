@@ -150,7 +150,7 @@ class _ProfileRidwanState extends State<ProfileRidwan> {
                       ),
                     ),
                   ],
-                ),
+                ), 
               ),
 
               const SizedBox(height: 20),
