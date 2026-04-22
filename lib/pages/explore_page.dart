@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz_poll/quiz_poll_page.dart';
+import 'calculator/calc_page.dart';
 
 class ExplorePage extends StatelessWidget {
   const ExplorePage({super.key});
@@ -14,6 +15,14 @@ class ExplorePage extends StatelessWidget {
         'color': const Color(0xFF1565C0),
         'page': const QuizPollPage(),
       },
+      {
+        'title': 'Calculator',
+        'description':
+            'Gunakan kalkulator untuk membantu perhitungan sehari-hari',
+        'icon': Icons.new_releases,
+        'color': const Color(0xFF7B1FA2),
+        'page': CalcPage(),
+      }
       // Fitur lain bisa ditambahkan di sini
     ];
 

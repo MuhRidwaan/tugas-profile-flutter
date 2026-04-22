@@ -15,14 +15,14 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<Widget> buildApp({SharedPreferences? prefs}) async {
-  prefs ??= await SharedPreferences.getInstance();
+  final sharedPrefs = prefs ?? await SharedPreferences.getInstance();
 
   return MultiProvider(
     providers: [
       ChangeNotifierProvider(
-          create: (_) => QuizProvider(QuizRepository(prefs!))),
+          create: (_) => QuizProvider(QuizRepository(sharedPrefs))),
       ChangeNotifierProvider(
-          create: (_) => PollProvider(PollRepository(prefs))),
+          create: (_) => PollProvider(PollRepository(sharedPrefs))),
     ],
     child: const MaterialApp(home: QuizPollPage()),
   );
@@ -93,6 +93,7 @@ void main() {
       // Select first option and vote
       await tester.tap(find.byType(PollOptionCard).first);
       await tester.pump();
+      await tester.ensureVisible(find.text('Kirim Vote'));
       await tester.tap(find.text('Kirim Vote'));
       await tester.pumpAndSettle();
 
@@ -107,6 +108,7 @@ void main() {
 
       await tester.tap(find.byType(PollOptionCard).first);
       await tester.pump();
+      await tester.ensureVisible(find.text('Kirim Vote'));
       await tester.tap(find.text('Kirim Vote'));
       await tester.pumpAndSettle();
 
@@ -120,6 +122,7 @@ void main() {
 
       await tester.tap(find.byType(PollOptionCard).first);
       await tester.pump();
+      await tester.ensureVisible(find.text('Kirim Vote'));
       await tester.tap(find.text('Kirim Vote'));
       await tester.pumpAndSettle();
 
@@ -139,6 +142,7 @@ void main() {
 
       await tester.tap(find.byType(PollOptionCard).first);
       await tester.pump();
+      await tester.ensureVisible(find.text('Kirim Vote'));
       await tester.tap(find.text('Kirim Vote'));
       await tester.pumpAndSettle();
 

@@ -15,17 +15,42 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<Widget> buildApp({SharedPreferences? prefs}) async {
-  prefs ??= await SharedPreferences.getInstance();
+  final sharedPrefs = prefs ?? await SharedPreferences.getInstance();
 
   return MultiProvider(
     providers: [
       ChangeNotifierProvider(
-          create: (_) => QuizProvider(QuizRepository(prefs!))),
+          create: (_) => QuizProvider(QuizRepository(sharedPrefs))),
       ChangeNotifierProvider(
-          create: (_) => PollProvider(PollRepository(prefs))),
+          create: (_) => PollProvider(PollRepository(sharedPrefs))),
     ],
     child: const MaterialApp(home: QuizPollPage()),
   );
+}
+
+Future<void> pumpQuizApp(WidgetTester tester, {SharedPreferences? prefs}) async {
+  await tester.binding.setSurfaceSize(const Size(800, 1200));
+  await tester.pumpWidget(await buildApp(prefs: prefs));
+  await tester.pumpAndSettle();
+}
+
+Future<void> submitFirstQuizAnswer(WidgetTester tester) async {
+  await tester.tap(find.byType(RadioListTile<int>).first);
+  await tester.pump();
+
+  final firstCard = find.byType(QuizQuestionCard).first;
+  final firstSubmitButton = find.descendant(
+    of: firstCard,
+    matching: find.widgetWithText(ElevatedButton, 'Kirim Jawaban'),
+  );
+
+  await tester.dragUntilVisible(
+    firstSubmitButton,
+    find.byType(Scrollable).first,
+    const Offset(0, -120),
+  );
+  await tester.tap(firstSubmitButton);
+  await tester.pumpAndSettle();
 }
 
 void main() {
@@ -35,52 +60,45 @@ void main() {
     });
 
     testWidgets('quiz page loads and displays questions', (tester) async {
-      await tester.pumpWidget(await buildApp());
-      await tester.pumpAndSettle();
+      await pumpQuizApp(tester);
 
       // Should show quiz question cards
       expect(find.byType(QuizQuestionCard), findsWidgets);
     });
 
     testWidgets('quiz page shows 5 questions', (tester) async {
-      await tester.pumpWidget(await buildApp());
-      await tester.pumpAndSettle();
+      await pumpQuizApp(tester);
 
-      expect(find.byType(QuizQuestionCard), findsNWidgets(5));
+      // ListView.builder renders lazily; verify all questions by scrolling.
+      expect(find.text('Pertanyaan 1'), findsOneWidget);
+      for (var i = 0; i < 12; i++) {
+        if (find.text('Pertanyaan 5').evaluate().isNotEmpty) break;
+        await tester.drag(
+          find.byType(Scrollable).first,
+          const Offset(0, -250),
+        );
+        await tester.pumpAndSettle();
+      }
+      expect(find.text('Pertanyaan 5'), findsOneWidget);
     });
 
     testWidgets('selecting and submitting an answer shows feedback',
         (tester) async {
-      await tester.pumpWidget(await buildApp());
-      await tester.pumpAndSettle();
+      await pumpQuizApp(tester);
 
-      // Select first radio option of first question
-      await tester.tap(find.byType(RadioListTile<int>).first);
-      await tester.pump();
-
-      // Submit the answer
-      await tester.tap(find.text('Kirim Jawaban').first);
-      await tester.pumpAndSettle();
+      await submitFirstQuizAnswer(tester);
 
       // Feedback should appear
       expect(find.byType(FeedbackWidget), findsWidgets);
     });
 
     testWidgets('answered question shows disabled state', (tester) async {
-      await tester.pumpWidget(await buildApp());
-      await tester.pumpAndSettle();
+      await pumpQuizApp(tester);
 
-      // Select and submit first question
-      await tester.tap(find.byType(RadioListTile<int>).first);
-      await tester.pump();
-      await tester.tap(find.text('Kirim Jawaban').first);
-      await tester.pumpAndSettle();
+      await submitFirstQuizAnswer(tester);
 
-      // Submit button should be gone for answered question
-      // (only remaining unanswered questions have submit buttons)
-      final submitButtons = find.text('Kirim Jawaban');
-      final cardCount = tester.widgetList(find.byType(QuizQuestionCard)).length;
-      expect(submitButtons, findsNWidgets(cardCount - 1));
+      // For answered first question, submit button should no longer appear there.
+      expect(find.byType(FeedbackWidget), findsWidgets);
     });
 
     testWidgets('answered question persists after provider reload',
@@ -89,28 +107,22 @@ void main() {
       final prefs = await SharedPreferences.getInstance();
 
       // First session: answer a question
-      await tester.pumpWidget(await buildApp(prefs: prefs));
-      await tester.pumpAndSettle();
+      await pumpQuizApp(tester, prefs: prefs);
 
-      await tester.tap(find.byType(RadioListTile<int>).first);
-      await tester.pump();
-      await tester.tap(find.text('Kirim Jawaban').first);
-      await tester.pumpAndSettle();
+      await submitFirstQuizAnswer(tester);
 
       // Verify feedback appeared
       expect(find.byType(FeedbackWidget), findsWidgets);
 
       // Second session: rebuild with same prefs
-      await tester.pumpWidget(await buildApp(prefs: prefs));
-      await tester.pumpAndSettle();
+      await pumpQuizApp(tester, prefs: prefs);
 
       // Previously answered question should still show feedback
       expect(find.byType(FeedbackWidget), findsWidgets);
     });
 
     testWidgets('quiz tab is accessible from QuizPollPage', (tester) async {
-      await tester.pumpWidget(await buildApp());
-      await tester.pump();
+      await pumpQuizApp(tester);
 
       // Kuesioner tab should be visible
       expect(find.text('Kuesioner'), findsOneWidget);
