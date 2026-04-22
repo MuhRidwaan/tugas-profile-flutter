@@ -37,10 +37,9 @@ void main() {
     // Verify that bottom navigation bar exists
     expect(find.byType(BottomNavigationBar), findsOneWidget);
 
-    // Verify navigation items exist
+    // Verify navigation items exist (now only 3 items)
     expect(find.text('Profil'), findsOneWidget);
     expect(find.text('Explore'), findsOneWidget);
-    expect(find.text('Quiz & Poll'), findsOneWidget);
     expect(find.text('Pengaturan'), findsOneWidget);
   });
 }

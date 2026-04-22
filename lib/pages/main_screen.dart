@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'explore_page.dart';
 import 'profile_list.dart';
-import 'quiz_poll/quiz_poll_page.dart';
 import 'settings_page.dart';
 
 class MainScreen extends StatefulWidget {
@@ -18,7 +17,6 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     const ProfileList(),
     const ExplorePage(),
-    const QuizPollPage(),
     const SettingsPage(),
   ];
 
@@ -51,11 +49,6 @@ class _MainScreenState extends State<MainScreen> {
             icon: Icon(Icons.explore_outlined),
             activeIcon: Icon(Icons.explore),
             label: 'Explore',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.quiz_outlined),
-            activeIcon: Icon(Icons.quiz),
-            label: 'Quiz & Poll',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings_outlined),
