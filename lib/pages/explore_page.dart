@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'quiz_poll/quiz_poll_page.dart';
 import 'calculator/calc_page.dart';
+import 'conditional_branching/conditional_branching_page.dart';
 
 class ExplorePage extends StatelessWidget {
   const ExplorePage({super.key});
@@ -21,7 +22,15 @@ class ExplorePage extends StatelessWidget {
             'Gunakan kalkulator untuk membantu perhitungan sehari-hari',
         'icon': Icons.new_releases,
         'color': const Color(0xFF7B1FA2),
-        'page': CalcPage(),
+        'page': const CalcPage(),
+      },
+      {
+        'title': 'Latihan Percabangan',
+        'description':
+            'Pelajari konsep percabangan kondisional melalui latihan interaktif',
+        'icon': Icons.account_tree,
+        'color': const Color(0xFFFF6F00),
+        'page': const ConditionalBranchingPage(),
       }
       // Fitur lain bisa ditambahkan di sini
     ];
