@@ -54,7 +54,9 @@ class _ProfileAzzamState extends State<ProfileAzzam> {
 
       if (pickedFile != null) {
         setState(() => _imageFile = File(pickedFile.path));
-        Navigator.pop(context);
+        if (mounted) {
+          Navigator.pop(context);
+        }
       }
     } catch (e) {
       debugPrint("Error ambil gambar: $e");
@@ -66,9 +68,11 @@ class _ProfileAzzamState extends State<ProfileAzzam> {
     final Uri uri = Uri.parse(url);
 
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Gagal membuka link")),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Gagal membuka link")),
+        );
+      }
     }
   }
 
@@ -185,8 +189,8 @@ class _ProfileAzzamState extends State<ProfileAzzam> {
                         _infoRow(Icons.school, 'Status',
                             'Mahasiswa Teknik Informatika'),
                         const Divider(),
-                        _infoRow(
-                            Icons.email, 'Email', 'azzamabdullahumar@gmail.com'),
+                        _infoRow(Icons.email, 'Email',
+                            'azzamabdullahumar@gmail.com'),
                       ],
                     ),
                   ),
@@ -199,9 +203,7 @@ class _ProfileAzzamState extends State<ProfileAzzam> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _socialBtn(
-                      'LinkedIn',
-                      'https://www.linkedin.com/in/azzamau/',
+                  _socialBtn('LinkedIn', 'https://www.linkedin.com/in/azzamau/',
                       const Color(0xFF0077B5)),
                   const SizedBox(width: 15),
                   _socialBtn(

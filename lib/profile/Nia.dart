@@ -54,7 +54,9 @@ class _ProfileNiaState extends State<ProfileNia> {
 
       if (pickedFile != null) {
         setState(() => _imageFile = File(pickedFile.path));
-        Navigator.pop(context);
+        if (mounted) {
+          Navigator.pop(context);
+        }
       }
     } catch (e) {
       debugPrint("Error ambil gambar: $e");
@@ -66,9 +68,11 @@ class _ProfileNiaState extends State<ProfileNia> {
     final Uri uri = Uri.parse(url);
 
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Gagal membuka link")),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Gagal membuka link")),
+        );
+      }
     }
   }
 
@@ -182,8 +186,8 @@ class _ProfileNiaState extends State<ProfileNia> {
                       children: [
                         _infoRow(Icons.badge, 'NIM', '0112523027'),
                         const Divider(),
-                        _infoRow(Icons.school, 'Status',
-                            'Mahasiswa Informatika'),
+                        _infoRow(
+                            Icons.school, 'Status', 'Mahasiswa Informatika'),
                         const Divider(),
                         _infoRow(
                             Icons.email, 'Email', 'niaa.astuti1@gmail.com'),
@@ -204,9 +208,7 @@ class _ProfileNiaState extends State<ProfileNia> {
                       'https://www.linkedin.com/in/nia-astuti-963054252/',
                       const Color(0xFF0077B5)),
                   const SizedBox(width: 15),
-                  _socialBtn(
-                      'Instagram',
-                      'https://www.instagram.com/naynias_/',
+                  _socialBtn('Instagram', 'https://www.instagram.com/naynias_/',
                       const Color(0xFFE4405F)),
                 ],
               ),

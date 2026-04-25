@@ -154,10 +154,11 @@ class _CalcPageState extends State<CalcPage> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: _accentPurple.withValues(alpha: 0.12),
+                        color: _accentPurple.withOpacity(0.12),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Icon(meta['icon'] as IconData, color: _accentPurple),
+                      child:
+                          Icon(meta['icon'] as IconData, color: _accentPurple),
                     ),
                     const SizedBox(width: 12),
                     Expanded(
@@ -198,7 +199,7 @@ class _CalcPageState extends State<CalcPage> {
                   child: Column(
                     children: [
                       DropdownButtonFormField<String>(
-                        initialValue: selectedRumus,
+                        value: selectedRumus,
                         decoration: InputDecoration(
                           labelText: 'Pilih rumus',
                           filled: true,
