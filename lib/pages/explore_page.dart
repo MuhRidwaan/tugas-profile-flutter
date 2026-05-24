@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'quiz_poll/quiz_poll_page.dart';
 import 'calculator/calc_page.dart';
 import 'conditional_branching/conditional_branching_page.dart';
+import 'number_series/number_series_page.dart';
 
 class ExplorePage extends StatelessWidget {
   const ExplorePage({super.key});
@@ -31,6 +32,14 @@ class ExplorePage extends StatelessWidget {
         'icon': Icons.account_tree,
         'color': const Color(0xFFFF6F00),
         'page': const ConditionalBranchingPage(),
+      },
+      {
+        'title': 'Latihan Bilangan',
+        'description':
+            'Pelajari konsep perulangan melalui visualisasi deret bilangan',
+        'icon': Icons.format_list_numbered,
+        'color': const Color(0xFF00695C),
+        'page': const NumberSeriesPage(),
       }
       // Fitur lain bisa ditambahkan di sini
     ];
