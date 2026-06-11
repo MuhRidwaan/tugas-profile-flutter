@@ -1,62 +1,48 @@
 import 'package:flutter/material.dart';
-import 'quiz_poll/quiz_poll_page.dart';
-import 'calculator/calc_page.dart';
-import 'conditional_branching/conditional_branching_page.dart';
-import 'number_series/number_series_page.dart';
-import 'sorting/sorting_algorithms_page.dart';
+import 'animated_sorting_visualizer.dart';
 
-class ExplorePage extends StatelessWidget {
-  const ExplorePage({super.key});
+class SortingAlgorithmsPage extends StatelessWidget {
+  const SortingAlgorithmsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final features = [
+    final algorithms = [
       {
-        'title': 'Quiz & Poll',
-        'description': 'Ikuti kuis interaktif dan berpartisipasi dalam polling',
-        'icon': Icons.quiz,
+        'name': 'Bubble Sort',
+        'icon': Icons.bubble_chart,
         'color': const Color(0xFF1565C0),
-        'page': const QuizPollPage(),
+        'description': 'Membandingkan elemen bersebelahan',
       },
       {
-        'title': 'Calculator',
-        'description':
-            'Gunakan kalkulator untuk membantu perhitungan sehari-hari',
-        'icon': Icons.new_releases,
+        'name': 'Selection Sort',
+        'icon': Icons.select_all,
         'color': const Color(0xFF7B1FA2),
-        'page': const CalcPage(),
+        'description': 'Memilih elemen terkecil/terbesar',
       },
       {
-        'title': 'Latihan Percabangan',
-        'description':
-            'Pelajari konsep percabangan kondisional melalui latihan interaktif',
-        'icon': Icons.account_tree,
+        'name': 'Insertion Sort',
+        'icon': Icons.input,
         'color': const Color(0xFFFF6F00),
-        'page': const ConditionalBranchingPage(),
+        'description': 'Memasukkan elemen ke posisi tepat',
       },
       {
-        'title': 'Latihan Bilangan',
-        'description':
-            'Pelajari konsep perulangan melalui visualisasi deret bilangan',
-        'icon': Icons.format_list_numbered,
+        'name': 'Merge Sort',
+        'icon': Icons.merge,
         'color': const Color(0xFF00695C),
-        'page': const NumberSeriesPage(),
+        'description': 'Membagi dan menggabungkan array',
       },
       {
-        'title': 'Algoritma Sorting',
-        'description':
-            'Pelajari berbagai algoritma pengurutan data dengan visualisasi',
-        'icon': Icons.sort,
-        'color': const Color(0xFFD32F2F),
-        'page': const SortingAlgorithmsPage(),
-      }
-      // Fitur lain bisa ditambahkan di sini
+        'name': 'Quick Sort',
+        'icon': Icons.speed,
+        'color': const Color(0xFFC62828),
+        'description': 'Menggunakan pivot untuk partisi',
+      },
     ];
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Explore',
+          'Algoritma Sorting',
           style: TextStyle(
             fontSize: 20,
             color: Colors.white,
@@ -66,6 +52,7 @@ class ExplorePage extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.white),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -87,41 +74,88 @@ class ExplorePage extends StatelessWidget {
             ],
           ),
         ),
-        child: ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: features.length,
-          itemBuilder: (context, index) {
-            final feature = features[index];
-            return _FeatureCard(
-              title: feature['title'] as String,
-              description: feature['description'] as String,
-              icon: feature['icon'] as IconData,
-              color: feature['color'] as Color,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => feature['page'] as Widget,
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF1565C0).withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Icon(
+                          Icons.info_outline,
+                          color: Color(0xFF1565C0),
+                          size: 28,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      const Expanded(
+                        child: Text(
+                          'Pilih algoritma sorting untuk mengurutkan 10 angka',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Color(0xFF424242),
+                            height: 1.4,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              },
-            );
-          },
+                ),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                itemCount: algorithms.length,
+                itemBuilder: (context, index) {
+                  final algorithm = algorithms[index];
+                  return _AlgorithmCard(
+                    name: algorithm['name'] as String,
+                    description: algorithm['description'] as String,
+                    icon: algorithm['icon'] as IconData,
+                    color: algorithm['color'] as Color,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AnimatedSortingVisualizer(
+                            algorithmName: algorithm['name'] as String,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class _FeatureCard extends StatelessWidget {
-  final String title;
+class _AlgorithmCard extends StatelessWidget {
+  final String name;
   final String description;
   final IconData icon;
   final Color color;
   final VoidCallback onTap;
 
-  const _FeatureCard({
-    required this.title,
+  const _AlgorithmCard({
+    required this.name,
     required this.description,
     required this.icon,
     required this.color,
@@ -173,7 +207,7 @@ class _FeatureCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                      name,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
