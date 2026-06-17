@@ -4,6 +4,7 @@ import 'calculator/calc_page.dart';
 import 'conditional_branching/conditional_branching_page.dart';
 import 'number_series/number_series_page.dart';
 import 'sorting/sorting_algorithms_page.dart';
+import 'zodiac/zodiac_page.dart';
 
 class ExplorePage extends StatelessWidget {
   const ExplorePage({super.key});
@@ -49,6 +50,14 @@ class ExplorePage extends StatelessWidget {
         'icon': Icons.sort,
         'color': const Color(0xFFD32F2F),
         'page': const SortingAlgorithmsPage(),
+      },
+      {
+        'title': 'Zodiac Info',
+        'description':
+            'Cari informasi zodiak berdasarkan nama atau tanggal lahir',
+        'icon': Icons.star_outline,
+        'color': const Color(0xFFFF6F00),
+        'page': const ZodiacPage(),
       }
       // Fitur lain bisa ditambahkan di sini
     ];
