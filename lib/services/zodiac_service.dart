@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:drift/drift.dart';
 import '../database/app_database.dart';
 import 'date_calculator.dart';
@@ -19,7 +20,11 @@ class ZodiacService {
     try {
       return await query();
     } catch (e) {
-      print('Query failed: $e. Attempting database recovery...');
+      print('Query failed: $e.');
+      if (Platform.environment.containsKey('FLUTTER_TEST')) {
+        rethrow;
+      }
+      print('Attempting database recovery...');
       try {
         await reinitializeDatabase();
         return await query(); // Retry once after re-initialization
@@ -98,8 +103,15 @@ class ZodiacService {
   Future<void> reinitializeDatabase() async {
     _cachedZodiacs = null;
     _cacheTime = null;
-    await _database.deleteDatabaseFile();
-    // Reopen database by forcing a query
-    await _database.select(_database.zodiacTable).get();
+    try {
+      // Attempt clean delete and re-insert first
+      await _database.delete(_database.zodiacTable).go();
+      await _database.insertInitialDataForRecovery();
+    } catch (e) {
+      print('Database recovery via delete/reinsert failed: $e. Falling back to file deletion...');
+      await _database.deleteDatabaseFile();
+      // Force reopening connection
+      await _database.select(_database.zodiacTable).get();
+    }
   }
 }

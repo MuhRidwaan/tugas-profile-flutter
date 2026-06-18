@@ -1,3 +1,7 @@
+import 'dart:ffi';
+import 'dart:io';
+import 'package:sqlite3/open.dart';
+import 'package:path/path.dart' as p;
 import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,19 +10,14 @@ import 'package:profile_tugas/services/zodiac_service.dart';
 import 'package:profile_tugas/pages/zodiac/widgets/query_by_name_tab.dart';
 
 void main() {
-  late AppDatabase database;
-  late ZodiacService service;
-
-  setUp(() {
-    database = AppDatabase.forTesting(NativeDatabase.memory());
-    service = ZodiacService(database);
-  });
-
-  tearDown(() async {
-    await database.close();
+  open.overrideFor(OperatingSystem.windows, () {
+    return DynamicLibrary.open(p.join(Directory.current.path, 'sqlite3.dll'));
   });
 
   testWidgets('QueryByNameTab search flow - validation error, success search', (WidgetTester tester) async {
+    final database = AppDatabase.forTesting(NativeDatabase.memory());
+    final service = ZodiacService(database);
+
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -53,5 +52,7 @@ void main() {
     expect(find.text('Aries'), findsWidgets); // TextField value + ResultCard header
     expect(find.text('Asmara & Hubungan'), findsOneWidget);
     expect(find.text('Karier & Finansial'), findsOneWidget);
+
+    await database.close();
   });
 }

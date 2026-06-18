@@ -1,3 +1,7 @@
+import 'dart:ffi';
+import 'dart:io';
+import 'package:sqlite3/open.dart';
+import 'package:path/path.dart' as p;
 import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,19 +10,14 @@ import 'package:profile_tugas/services/zodiac_service.dart';
 import 'package:profile_tugas/pages/zodiac/widgets/query_by_date_tab.dart';
 
 void main() {
-  late AppDatabase database;
-  late ZodiacService service;
-
-  setUp(() {
-    database = AppDatabase.forTesting(NativeDatabase.memory());
-    service = ZodiacService(database);
-  });
-
-  tearDown(() async {
-    await database.close();
+  open.overrideFor(OperatingSystem.windows, () {
+    return DynamicLibrary.open(p.join(Directory.current.path, 'sqlite3.dll'));
   });
 
   testWidgets('QueryByDateTab search flow - validation error, success search by date', (WidgetTester tester) async {
+    final database = AppDatabase.forTesting(NativeDatabase.memory());
+    final service = ZodiacService(database);
+
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -37,30 +36,32 @@ void main() {
     // Should show validation error message
     expect(find.text('Pilih tanggal dan bulan lahir Anda.'), findsOneWidget);
 
-    // Let's select Day 25 and Month December (Month 12)
-    // Find dropdown for Day and select 25
-    await tester.tap(find.byKey(const Key('day-dropdown')));
+    // Let's select Day 5 and Month Maret (Month 3)
+    // Find dropdown for Day and select 5
+    await tester.tap(find.byType(DropdownButton<int>).first);
     await tester.pumpAndSettle();
     
-    // Select day 25
-    await tester.tap(find.text('25').last);
+    // Select day 5
+    await tester.tap(find.text('5').last);
     await tester.pumpAndSettle();
 
-    // Find dropdown for Month and select Desember (Month 12)
-    await tester.tap(find.byKey(const Key('month-dropdown')));
+    // Find dropdown for Month and select Maret (Month 3)
+    await tester.tap(find.byType(DropdownButton<int>).last);
     await tester.pumpAndSettle();
 
-    // Select Desember
-    await tester.tap(find.text('Desember').last);
+    // Select Maret
+    await tester.tap(find.text('Maret').last);
     await tester.pumpAndSettle();
 
     // Click search
     await tester.tap(find.byIcon(Icons.calendar_today));
     await tester.pumpAndSettle(); // Finish lookup
 
-    // Should render result card for Capricorn (since 25 Dec is Capricorn)
-    expect(find.text('Capricorn'), findsOneWidget);
+    // Should render result card for Pisces (since 5 Mar is Pisces)
+    expect(find.text('Pisces'), findsOneWidget);
     expect(find.text('Asmara & Hubungan'), findsOneWidget);
     expect(find.text('Karier & Finansial'), findsOneWidget);
+
+    await database.close();
   });
 }

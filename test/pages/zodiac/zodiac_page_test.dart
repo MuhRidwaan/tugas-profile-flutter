@@ -1,10 +1,19 @@
+import 'dart:ffi';
+import 'dart:io';
+import 'package:sqlite3/open.dart';
+import 'package:path/path.dart' as p;
 import 'package:drift/native.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:profile_tugas/database/app_database.dart';
 import 'package:profile_tugas/services/zodiac_service.dart';
+import 'package:profile_tugas/pages/zodiac/zodiac_page.dart';
 
 void main() {
+  open.overrideFor(OperatingSystem.windows, () {
+    return DynamicLibrary.open(p.join(Directory.current.path, 'sqlite3.dll'));
+  });
+
   testWidgets('ZodiacPage end-to-end flow and tab switching', (WidgetTester tester) async {
     final database = AppDatabase.forTesting(NativeDatabase.memory());
     final service = ZodiacService(database);

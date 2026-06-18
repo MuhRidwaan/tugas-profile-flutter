@@ -144,6 +144,10 @@ class AppDatabase extends _$AppDatabase {
     }
   }
 
+  Future<void> insertInitialDataForRecovery() async {
+    await _insertInitialData();
+  }
+
   // Exposed helper to clean/recreate the DB file for recovery
   Future<void> deleteDatabaseFile() async {
     await close();
