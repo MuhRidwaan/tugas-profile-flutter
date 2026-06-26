@@ -4,26 +4,40 @@ import 'package:drift/native.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as p;
 import 'tables/zodiac_table.dart';
+import 'tables/user_table.dart';
+import 'tables/role_table.dart';
+import 'tables/permission_table.dart';
+import 'tables/role_permission_table.dart';
 
 part 'app_database.g.dart';
 
-@DriftDatabase(tables: [ZodiacTable])
+@DriftDatabase(tables: [ZodiacTable, UserTable, RoleTable, PermissionTable, RolePermissionTable])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   AppDatabase.forTesting(QueryExecutor executor) : super(executor);
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 3;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (Migrator m) async {
           await m.createAll();
           await _insertInitialData();
+          await _insertInitialRolesAndAdmin();
         },
         onUpgrade: (Migrator m, int from, int to) async {
-          // Implement upgrades here when schemaVersion changes
+          if (from < 2) {
+            await m.createTable(userTable);
+            await m.createTable(roleTable);
+            await m.createTable(permissionTable);
+            await m.createTable(rolePermissionTable);
+            await _insertInitialRolesAndAdmin();
+          }
+          if (from < 3) {
+            await _insertExplorePermissions();
+          }
         },
       );
 
@@ -144,8 +158,102 @@ class AppDatabase extends _$AppDatabase {
     }
   }
 
+  Future<void> _insertExplorePermissions() async {
+    final explorePermissions = [
+      'view_quiz_poll',
+      'view_calculator',
+      'view_conditional',
+      'view_number_series',
+      'view_sorting'
+    ];
+    
+    // Find superadmin role ID
+    final query = select(roleTable)..where((t) => t.roleName.equals('superadmin'));
+    final superadminRole = await query.getSingleOrNull();
+    
+    if (superadminRole == null) return;
+    
+    for (final p in explorePermissions) {
+      // check if it exists
+      final checkQuery = select(permissionTable)..where((t) => t.permissionName.equals(p));
+      final exists = await checkQuery.getSingleOrNull();
+      
+      int permId;
+      if (exists == null) {
+        permId = await into(permissionTable).insert(
+          PermissionTableCompanion.insert(permissionName: p),
+        );
+      } else {
+        permId = exists.id;
+      }
+      
+      // add to superadmin
+      final checkRpQuery = select(rolePermissionTable)
+        ..where((t) => t.roleId.equals(superadminRole.id))
+        ..where((t) => t.permissionId.equals(permId));
+        
+      if (await checkRpQuery.getSingleOrNull() == null) {
+        await into(rolePermissionTable).insert(
+          RolePermissionTableCompanion.insert(
+            roleId: superadminRole.id,
+            permissionId: permId,
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _insertInitialRolesAndAdmin() async {
+    // 1. Insert permissions
+    final permissions = [
+      'manage_users',
+      'manage_roles',
+      'view_dashboard',
+      'view_zodiac',
+      'edit_zodiac',
+      'view_quiz_poll',
+      'view_calculator',
+      'view_conditional',
+      'view_number_series',
+      'view_sorting'
+    ];
+    
+    Map<String, int> permIds = {};
+    for (final p in permissions) {
+      final id = await into(permissionTable).insert(
+        PermissionTableCompanion.insert(permissionName: p),
+      );
+      permIds[p] = id;
+    }
+
+    // 2. Insert Superadmin Role
+    final roleId = await into(roleTable).insert(
+      RoleTableCompanion.insert(roleName: 'superadmin'),
+    );
+
+    // 3. Assign all permissions to Superadmin
+    for (final pId in permIds.values) {
+      await into(rolePermissionTable).insert(
+        RolePermissionTableCompanion.insert(
+          roleId: roleId,
+          permissionId: pId,
+        ),
+      );
+    }
+
+    // 4. Create default superadmin user
+    await into(userTable).insert(
+      UserTableCompanion.insert(
+        username: 'admin',
+        password: 'password',
+        roleId: Value(roleId),
+      ),
+    );
+  }
+
   Future<void> insertInitialDataForRecovery() async {
     await _insertInitialData();
+    await _insertInitialRolesAndAdmin();
   }
 
   // Exposed helper to clean/recreate the DB file for recovery

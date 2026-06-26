@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
+import 'users/user_management_page.dart';
+import 'roles/role_management_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -28,34 +32,53 @@ class SettingsPage extends StatelessWidget {
           ),
         ),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.settings_outlined,
-              size: 80,
-              color: Color(0xFFBDBDBD),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Segera Hadir',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF757575),
+      body: Consumer<AuthProvider>(
+        builder: (context, auth, _) {
+          return ListView(
+            padding: const EdgeInsets.all(16.0),
+            children: [
+              if (auth.hasPermission('manage_users'))
+                ListTile(
+                  leading: const Icon(Icons.people),
+                  title: const Text('Manajemen Pengguna'),
+                  subtitle: const Text('Tambah, hapus, dan atur role pengguna'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const UserManagementPage()),
+                    );
+                  },
+                ),
+              if (auth.hasPermission('manage_users'))
+                const Divider(),
+              
+              if (auth.hasPermission('manage_roles'))
+                ListTile(
+                  leading: const Icon(Icons.admin_panel_settings),
+                  title: const Text('Manajemen Role'),
+                  subtitle: const Text('Tambah role dan atur hak akses'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const RoleManagementPage()),
+                    );
+                  },
+                ),
+              if (auth.hasPermission('manage_roles'))
+                const Divider(),
+
+              ListTile(
+                leading: const Icon(Icons.logout, color: Colors.red),
+                title: const Text('Logout', style: TextStyle(color: Colors.red)),
+                onTap: () {
+                  auth.logout();
+                },
               ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'Fitur Pengaturan sedang dalam pengembangan',
-              style: TextStyle(
-                fontSize: 14,
-                color: Color(0xFFBDBDBD),
-              ),
-            ),
-          ],
-        ),
+            ],
+          );
+        },
       ),
     );
   }

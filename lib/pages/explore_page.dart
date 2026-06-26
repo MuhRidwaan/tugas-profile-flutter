@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/auth_provider.dart';
 import 'quiz_poll/quiz_poll_page.dart';
 import 'calculator/calc_page.dart';
 import 'conditional_branching/conditional_branching_page.dart';
@@ -11,13 +13,16 @@ class ExplorePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final features = [
+    final auth = context.watch<AuthProvider>();
+
+    final allFeatures = [
       {
         'title': 'Quiz & Poll',
         'description': 'Ikuti kuis interaktif dan berpartisipasi dalam polling',
         'icon': Icons.quiz,
         'color': const Color(0xFF1565C0),
         'page': const QuizPollPage(),
+        'permission': 'view_quiz_poll',
       },
       {
         'title': 'Calculator',
@@ -26,6 +31,7 @@ class ExplorePage extends StatelessWidget {
         'icon': Icons.new_releases,
         'color': const Color(0xFF7B1FA2),
         'page': const CalcPage(),
+        'permission': 'view_calculator',
       },
       {
         'title': 'Latihan Percabangan',
@@ -34,6 +40,7 @@ class ExplorePage extends StatelessWidget {
         'icon': Icons.account_tree,
         'color': const Color(0xFFFF6F00),
         'page': const ConditionalBranchingPage(),
+        'permission': 'view_conditional',
       },
       {
         'title': 'Latihan Bilangan',
@@ -42,6 +49,7 @@ class ExplorePage extends StatelessWidget {
         'icon': Icons.format_list_numbered,
         'color': const Color(0xFF00695C),
         'page': const NumberSeriesPage(),
+        'permission': 'view_number_series',
       },
       {
         'title': 'Algoritma Sorting',
@@ -50,6 +58,7 @@ class ExplorePage extends StatelessWidget {
         'icon': Icons.sort,
         'color': const Color(0xFFD32F2F),
         'page': const SortingAlgorithmsPage(),
+        'permission': 'view_sorting',
       },
       {
         'title': 'Zodiac Info',
@@ -58,9 +67,13 @@ class ExplorePage extends StatelessWidget {
         'icon': Icons.star_outline,
         'color': const Color(0xFFFF6F00),
         'page': const ZodiacPage(),
+        'permission': 'view_zodiac',
       }
-      // Fitur lain bisa ditambahkan di sini
     ];
+
+    final features = allFeatures
+        .where((f) => auth.hasPermission(f['permission'] as String))
+        .toList();
 
     return Scaffold(
       appBar: AppBar(
