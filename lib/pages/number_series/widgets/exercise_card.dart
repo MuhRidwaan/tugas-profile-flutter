@@ -45,7 +45,7 @@ class ExerciseCard extends StatelessWidget {
               end: Alignment.bottomRight,
               colors: [
                 Colors.white,
-                color.withOpacity(0.05),
+                color.withValues(alpha: 0.05),
               ],
             ),
           ),
@@ -56,7 +56,7 @@ class ExerciseCard extends StatelessWidget {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
@@ -95,7 +95,7 @@ class ExerciseCard extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: color.withOpacity(0.15),
+                        color: color.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -114,7 +114,7 @@ class ExerciseCard extends StatelessWidget {
               Icon(
                 Icons.arrow_forward_ios,
                 size: 20,
-                color: color.withOpacity(0.5),
+                color: color.withValues(alpha: 0.5),
               ),
             ],
           ),

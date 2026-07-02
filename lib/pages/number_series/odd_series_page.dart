@@ -106,7 +106,7 @@ class _OddSeriesPageState extends State<OddSeriesPage> {
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF2E7D32).withOpacity(0.15),
+                    color: const Color(0xFF2E7D32).withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Text(

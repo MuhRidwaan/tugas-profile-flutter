@@ -224,7 +224,7 @@ class _GeometryCalculatorState extends State<GeometryCalculator> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(16),
-                          boxShadow: [BoxShadow(color: Colors.green.withOpacity(0.2), blurRadius: 10)],
+                          boxShadow: [BoxShadow(color: Colors.green.withValues(alpha: 0.2), blurRadius: 10)],
                         ),
                         child: Column(
                           children: [

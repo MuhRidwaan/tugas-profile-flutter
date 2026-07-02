@@ -158,12 +158,12 @@ class ProfileCard extends StatelessWidget {
             BoxShadow(
               blurRadius: 15,
               spreadRadius: 2,
-              color: gradientColors[0].withOpacity(0.5),
+              color: gradientColors[0].withValues(alpha: 0.5),
               offset: const Offset(0, 8),
             ),
           ],
           border: Border.all(
-            color: Colors.white.withOpacity(0.3),
+            color: Colors.white.withValues(alpha: 0.3),
             width: 1.5,
           ),
         ),
@@ -250,7 +250,7 @@ class ProfileCard extends StatelessWidget {
                     color: Colors.white24,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: Colors.white.withOpacity(0.5),
+                      color: Colors.white.withValues(alpha: 0.5),
                       width: 0.5,
                     ),
                   ),

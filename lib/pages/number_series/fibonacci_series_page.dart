@@ -98,10 +98,10 @@ class _FibonacciSeriesPageState extends State<FibonacciSeriesPage> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF283593).withOpacity(0.1),
+                  color: const Color(0xFF283593).withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                    color: const Color(0xFF283593).withOpacity(0.3),
+                    color: const Color(0xFF283593).withValues(alpha: 0.3),
                   ),
                 ),
                 child: const Text(

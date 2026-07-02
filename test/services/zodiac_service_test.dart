@@ -36,7 +36,7 @@ void main() {
           name.toLowerCase(),
           name.toUpperCase(),
           name[0].toLowerCase() + name.substring(1).toUpperCase(),
-          ' ' + name + ' ', // with spacing
+          ' $name ', // with spacing
         ];
 
         for (final perm in permutations) {

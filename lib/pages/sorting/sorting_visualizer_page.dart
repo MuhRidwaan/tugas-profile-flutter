@@ -153,7 +153,7 @@ class _SortingVisualizerPageState extends State<SortingVisualizerPage> {
             gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [color, color.withOpacity(0.7)],
+              colors: [color, color.withValues(alpha: 0.7)],
             ),
           ),
         ),
@@ -215,7 +215,7 @@ class _SortingVisualizerPageState extends State<SortingVisualizerPage> {
                           vertical: 8,
                         ),
                         decoration: BoxDecoration(
-                          color: color.withOpacity(0.1),
+                          color: color.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Row(
@@ -296,7 +296,7 @@ class _SortingVisualizerPageState extends State<SortingVisualizerPage> {
                             decoration: InputDecoration(
                               hintText: '${index + 1}',
                               filled: true,
-                              fillColor: color.withOpacity(0.05),
+                              fillColor: color.withValues(alpha: 0.05),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(color: color),
@@ -304,7 +304,7 @@ class _SortingVisualizerPageState extends State<SortingVisualizerPage> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(
-                                  color: color.withOpacity(0.3),
+                                  color: color.withValues(alpha: 0.3),
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -487,7 +487,7 @@ class _OrderOption extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? color.withOpacity(0.1) : Colors.grey[100],
+          color: isSelected ? color.withValues(alpha: 0.1) : Colors.grey[100],
           border: Border.all(
             color: isSelected ? color : Colors.grey[300]!,
             width: isSelected ? 2 : 1,
@@ -514,7 +514,7 @@ class _OrderOption extends StatelessWidget {
               subtitle,
               style: TextStyle(
                 fontSize: 12,
-                color: isSelected ? color.withOpacity(0.7) : Colors.grey,
+                color: isSelected ? color.withValues(alpha: 0.7) : Colors.grey,
               ),
             ),
           ],
@@ -551,7 +551,7 @@ class _ResultCard extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: [
               Colors.white,
-              color.withOpacity(0.05),
+              color.withValues(alpha: 0.05),
             ],
           ),
         ),
@@ -583,10 +583,10 @@ class _ResultCard extends StatelessWidget {
                     vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.1),
+                    color: color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
-                      color: color.withOpacity(0.3),
+                      color: color.withValues(alpha: 0.3),
                     ),
                   ),
                   child: Text(

@@ -90,7 +90,7 @@ class SortingAlgorithmsPage extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(12),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF1565C0).withOpacity(0.1),
+                          color: const Color(0xFF1565C0).withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: const Icon(
@@ -182,7 +182,7 @@ class _AlgorithmCard extends StatelessWidget {
               end: Alignment.bottomRight,
               colors: [
                 Colors.white,
-                color.withOpacity(0.05),
+                color.withValues(alpha: 0.05),
               ],
             ),
           ),
@@ -192,7 +192,7 @@ class _AlgorithmCard extends StatelessWidget {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
@@ -228,7 +228,7 @@ class _AlgorithmCard extends StatelessWidget {
               Icon(
                 Icons.arrow_forward_ios,
                 size: 20,
-                color: color.withOpacity(0.5),
+                color: color.withValues(alpha: 0.5),
               ),
             ],
           ),

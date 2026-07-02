@@ -92,7 +92,7 @@ class _IntegerSeriesPageState extends State<IntegerSeriesPage> {
                 vertical: 4,
               ),
               decoration: BoxDecoration(
-                color: themeColor.withOpacity(0.15),
+                color: themeColor.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Text(

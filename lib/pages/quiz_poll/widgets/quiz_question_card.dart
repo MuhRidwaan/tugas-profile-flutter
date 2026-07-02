@@ -261,13 +261,13 @@ class _QuizQuestionCardState extends State<QuizQuestionCard> {
       fillColor: WidgetStateProperty.resolveWith((states) {
         if (_isAnswered) {
           if (isSelected) return optionColor;
-          return _disabledGrey.withOpacity(0.5);
+          return _disabledGrey.withValues(alpha: 0.5);
         }
         if (states.contains(WidgetState.selected)) return _primaryBlue;
         return _disabledGrey;
       }),
       tileColor:
-          _isAnswered && isSelected ? optionColor.withOpacity(0.08) : null,
+          _isAnswered && isSelected ? optionColor.withValues(alpha: 0.08) : null,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -302,13 +302,13 @@ class _QuizQuestionCardState extends State<QuizQuestionCard> {
       fillColor: WidgetStateProperty.resolveWith((states) {
         if (_isAnswered) {
           if (isSelected) return optionColor;
-          return _disabledGrey.withOpacity(0.5);
+          return _disabledGrey.withValues(alpha: 0.5);
         }
         if (states.contains(WidgetState.selected)) return _primaryBlue;
         return null;
       }),
       tileColor:
-          _isAnswered && isSelected ? optionColor.withOpacity(0.08) : null,
+          _isAnswered && isSelected ? optionColor.withValues(alpha: 0.08) : null,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
@@ -325,7 +325,7 @@ class _QuizQuestionCardState extends State<QuizQuestionCard> {
           onPressed: _canSubmit ? _submit : null,
           style: ElevatedButton.styleFrom(
             backgroundColor: _primaryBlue,
-            disabledBackgroundColor: _disabledGrey.withOpacity(0.3),
+            disabledBackgroundColor: _disabledGrey.withValues(alpha: 0.3),
             foregroundColor: Colors.white,
             disabledForegroundColor: _disabledGrey,
             padding: const EdgeInsets.symmetric(vertical: 14),

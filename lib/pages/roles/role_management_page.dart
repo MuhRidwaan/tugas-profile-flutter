@@ -128,7 +128,7 @@ class _RoleManagementPageState extends State<RoleManagementPage> {
                           Container(
                             padding: const EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF1565C0).withOpacity(0.1),
+                              color: const Color(0xFF1565C0).withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: const Icon(
