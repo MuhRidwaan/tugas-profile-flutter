@@ -1289,6 +1289,415 @@ class RolePermissionTableCompanion extends UpdateCompanion<RolePermission> {
   }
 }
 
+class $ClassPollTableTable extends ClassPollTable
+    with TableInfo<$ClassPollTableTable, ClassPoll> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ClassPollTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _userIdMeta = const VerificationMeta('userId');
+  @override
+  late final GeneratedColumn<int> userId = GeneratedColumn<int>(
+      'user_id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: true,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('REFERENCES user_table (id)'));
+  static const VerificationMeta _weightMeta = const VerificationMeta('weight');
+  @override
+  late final GeneratedColumn<double> weight = GeneratedColumn<double>(
+      'weight', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _heightMeta = const VerificationMeta('height');
+  @override
+  late final GeneratedColumn<double> height = GeneratedColumn<double>(
+      'height', aliasedName, false,
+      type: DriftSqlType.double, requiredDuringInsert: true);
+  static const VerificationMeta _shirtSizeMeta =
+      const VerificationMeta('shirtSize');
+  @override
+  late final GeneratedColumn<String> shirtSize = GeneratedColumn<String>(
+      'shirt_size', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _shoeSizeMeta =
+      const VerificationMeta('shoeSize');
+  @override
+  late final GeneratedColumn<int> shoeSize = GeneratedColumn<int>(
+      'shoe_size', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _ageMeta = const VerificationMeta('age');
+  @override
+  late final GeneratedColumn<int> age = GeneratedColumn<int>(
+      'age', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _createdAtMeta =
+      const VerificationMeta('createdAt');
+  @override
+  late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
+      'created_at', aliasedName, false,
+      type: DriftSqlType.dateTime,
+      requiredDuringInsert: false,
+      defaultValue: currentDateAndTime);
+  @override
+  List<GeneratedColumn> get $columns =>
+      [id, userId, weight, height, shirtSize, shoeSize, age, createdAt];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'class_poll_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<ClassPoll> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('user_id')) {
+      context.handle(_userIdMeta,
+          userId.isAcceptableOrUnknown(data['user_id']!, _userIdMeta));
+    } else if (isInserting) {
+      context.missing(_userIdMeta);
+    }
+    if (data.containsKey('weight')) {
+      context.handle(_weightMeta,
+          weight.isAcceptableOrUnknown(data['weight']!, _weightMeta));
+    } else if (isInserting) {
+      context.missing(_weightMeta);
+    }
+    if (data.containsKey('height')) {
+      context.handle(_heightMeta,
+          height.isAcceptableOrUnknown(data['height']!, _heightMeta));
+    } else if (isInserting) {
+      context.missing(_heightMeta);
+    }
+    if (data.containsKey('shirt_size')) {
+      context.handle(_shirtSizeMeta,
+          shirtSize.isAcceptableOrUnknown(data['shirt_size']!, _shirtSizeMeta));
+    } else if (isInserting) {
+      context.missing(_shirtSizeMeta);
+    }
+    if (data.containsKey('shoe_size')) {
+      context.handle(_shoeSizeMeta,
+          shoeSize.isAcceptableOrUnknown(data['shoe_size']!, _shoeSizeMeta));
+    } else if (isInserting) {
+      context.missing(_shoeSizeMeta);
+    }
+    if (data.containsKey('age')) {
+      context.handle(
+          _ageMeta, age.isAcceptableOrUnknown(data['age']!, _ageMeta));
+    } else if (isInserting) {
+      context.missing(_ageMeta);
+    }
+    if (data.containsKey('created_at')) {
+      context.handle(_createdAtMeta,
+          createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ClassPoll map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ClassPoll(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      userId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}user_id'])!,
+      weight: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}weight'])!,
+      height: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}height'])!,
+      shirtSize: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}shirt_size'])!,
+      shoeSize: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}shoe_size'])!,
+      age: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}age'])!,
+      createdAt: attachedDatabase.typeMapping
+          .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+    );
+  }
+
+  @override
+  $ClassPollTableTable createAlias(String alias) {
+    return $ClassPollTableTable(attachedDatabase, alias);
+  }
+}
+
+class ClassPoll extends DataClass implements Insertable<ClassPoll> {
+  final int id;
+  final int userId;
+  final double weight;
+  final double height;
+  final String shirtSize;
+  final int shoeSize;
+  final int age;
+  final DateTime createdAt;
+  const ClassPoll(
+      {required this.id,
+      required this.userId,
+      required this.weight,
+      required this.height,
+      required this.shirtSize,
+      required this.shoeSize,
+      required this.age,
+      required this.createdAt});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['user_id'] = Variable<int>(userId);
+    map['weight'] = Variable<double>(weight);
+    map['height'] = Variable<double>(height);
+    map['shirt_size'] = Variable<String>(shirtSize);
+    map['shoe_size'] = Variable<int>(shoeSize);
+    map['age'] = Variable<int>(age);
+    map['created_at'] = Variable<DateTime>(createdAt);
+    return map;
+  }
+
+  ClassPollTableCompanion toCompanion(bool nullToAbsent) {
+    return ClassPollTableCompanion(
+      id: Value(id),
+      userId: Value(userId),
+      weight: Value(weight),
+      height: Value(height),
+      shirtSize: Value(shirtSize),
+      shoeSize: Value(shoeSize),
+      age: Value(age),
+      createdAt: Value(createdAt),
+    );
+  }
+
+  factory ClassPoll.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ClassPoll(
+      id: serializer.fromJson<int>(json['id']),
+      userId: serializer.fromJson<int>(json['userId']),
+      weight: serializer.fromJson<double>(json['weight']),
+      height: serializer.fromJson<double>(json['height']),
+      shirtSize: serializer.fromJson<String>(json['shirtSize']),
+      shoeSize: serializer.fromJson<int>(json['shoeSize']),
+      age: serializer.fromJson<int>(json['age']),
+      createdAt: serializer.fromJson<DateTime>(json['createdAt']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'userId': serializer.toJson<int>(userId),
+      'weight': serializer.toJson<double>(weight),
+      'height': serializer.toJson<double>(height),
+      'shirtSize': serializer.toJson<String>(shirtSize),
+      'shoeSize': serializer.toJson<int>(shoeSize),
+      'age': serializer.toJson<int>(age),
+      'createdAt': serializer.toJson<DateTime>(createdAt),
+    };
+  }
+
+  ClassPoll copyWith(
+          {int? id,
+          int? userId,
+          double? weight,
+          double? height,
+          String? shirtSize,
+          int? shoeSize,
+          int? age,
+          DateTime? createdAt}) =>
+      ClassPoll(
+        id: id ?? this.id,
+        userId: userId ?? this.userId,
+        weight: weight ?? this.weight,
+        height: height ?? this.height,
+        shirtSize: shirtSize ?? this.shirtSize,
+        shoeSize: shoeSize ?? this.shoeSize,
+        age: age ?? this.age,
+        createdAt: createdAt ?? this.createdAt,
+      );
+  ClassPoll copyWithCompanion(ClassPollTableCompanion data) {
+    return ClassPoll(
+      id: data.id.present ? data.id.value : this.id,
+      userId: data.userId.present ? data.userId.value : this.userId,
+      weight: data.weight.present ? data.weight.value : this.weight,
+      height: data.height.present ? data.height.value : this.height,
+      shirtSize: data.shirtSize.present ? data.shirtSize.value : this.shirtSize,
+      shoeSize: data.shoeSize.present ? data.shoeSize.value : this.shoeSize,
+      age: data.age.present ? data.age.value : this.age,
+      createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ClassPoll(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('weight: $weight, ')
+          ..write('height: $height, ')
+          ..write('shirtSize: $shirtSize, ')
+          ..write('shoeSize: $shoeSize, ')
+          ..write('age: $age, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      id, userId, weight, height, shirtSize, shoeSize, age, createdAt);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ClassPoll &&
+          other.id == this.id &&
+          other.userId == this.userId &&
+          other.weight == this.weight &&
+          other.height == this.height &&
+          other.shirtSize == this.shirtSize &&
+          other.shoeSize == this.shoeSize &&
+          other.age == this.age &&
+          other.createdAt == this.createdAt);
+}
+
+class ClassPollTableCompanion extends UpdateCompanion<ClassPoll> {
+  final Value<int> id;
+  final Value<int> userId;
+  final Value<double> weight;
+  final Value<double> height;
+  final Value<String> shirtSize;
+  final Value<int> shoeSize;
+  final Value<int> age;
+  final Value<DateTime> createdAt;
+  const ClassPollTableCompanion({
+    this.id = const Value.absent(),
+    this.userId = const Value.absent(),
+    this.weight = const Value.absent(),
+    this.height = const Value.absent(),
+    this.shirtSize = const Value.absent(),
+    this.shoeSize = const Value.absent(),
+    this.age = const Value.absent(),
+    this.createdAt = const Value.absent(),
+  });
+  ClassPollTableCompanion.insert({
+    this.id = const Value.absent(),
+    required int userId,
+    required double weight,
+    required double height,
+    required String shirtSize,
+    required int shoeSize,
+    required int age,
+    this.createdAt = const Value.absent(),
+  })  : userId = Value(userId),
+        weight = Value(weight),
+        height = Value(height),
+        shirtSize = Value(shirtSize),
+        shoeSize = Value(shoeSize),
+        age = Value(age);
+  static Insertable<ClassPoll> custom({
+    Expression<int>? id,
+    Expression<int>? userId,
+    Expression<double>? weight,
+    Expression<double>? height,
+    Expression<String>? shirtSize,
+    Expression<int>? shoeSize,
+    Expression<int>? age,
+    Expression<DateTime>? createdAt,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (userId != null) 'user_id': userId,
+      if (weight != null) 'weight': weight,
+      if (height != null) 'height': height,
+      if (shirtSize != null) 'shirt_size': shirtSize,
+      if (shoeSize != null) 'shoe_size': shoeSize,
+      if (age != null) 'age': age,
+      if (createdAt != null) 'created_at': createdAt,
+    });
+  }
+
+  ClassPollTableCompanion copyWith(
+      {Value<int>? id,
+      Value<int>? userId,
+      Value<double>? weight,
+      Value<double>? height,
+      Value<String>? shirtSize,
+      Value<int>? shoeSize,
+      Value<int>? age,
+      Value<DateTime>? createdAt}) {
+    return ClassPollTableCompanion(
+      id: id ?? this.id,
+      userId: userId ?? this.userId,
+      weight: weight ?? this.weight,
+      height: height ?? this.height,
+      shirtSize: shirtSize ?? this.shirtSize,
+      shoeSize: shoeSize ?? this.shoeSize,
+      age: age ?? this.age,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (userId.present) {
+      map['user_id'] = Variable<int>(userId.value);
+    }
+    if (weight.present) {
+      map['weight'] = Variable<double>(weight.value);
+    }
+    if (height.present) {
+      map['height'] = Variable<double>(height.value);
+    }
+    if (shirtSize.present) {
+      map['shirt_size'] = Variable<String>(shirtSize.value);
+    }
+    if (shoeSize.present) {
+      map['shoe_size'] = Variable<int>(shoeSize.value);
+    }
+    if (age.present) {
+      map['age'] = Variable<int>(age.value);
+    }
+    if (createdAt.present) {
+      map['created_at'] = Variable<DateTime>(createdAt.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ClassPollTableCompanion(')
+          ..write('id: $id, ')
+          ..write('userId: $userId, ')
+          ..write('weight: $weight, ')
+          ..write('height: $height, ')
+          ..write('shirtSize: $shirtSize, ')
+          ..write('shoeSize: $shoeSize, ')
+          ..write('age: $age, ')
+          ..write('createdAt: $createdAt')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1299,12 +1708,19 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $PermissionTableTable(this);
   late final $RolePermissionTableTable rolePermissionTable =
       $RolePermissionTableTable(this);
+  late final $ClassPollTableTable classPollTable = $ClassPollTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [zodiacTable, userTable, roleTable, permissionTable, rolePermissionTable];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        zodiacTable,
+        userTable,
+        roleTable,
+        permissionTable,
+        rolePermissionTable,
+        classPollTable
+      ];
   @override
   DriftDatabaseOptions get options =>
       const DriftDatabaseOptions(storeDateTimeAsText: true);
@@ -1538,6 +1954,26 @@ typedef $$UserTableTableUpdateCompanionBuilder = UserTableCompanion Function({
   Value<int?> roleId,
 });
 
+final class $$UserTableTableReferences
+    extends BaseReferences<_$AppDatabase, $UserTableTable, User> {
+  $$UserTableTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$ClassPollTableTable, List<ClassPoll>>
+      _classPollTableRefsTable(_$AppDatabase db) =>
+          MultiTypedResultKey.fromTable(db.classPollTable,
+              aliasName: $_aliasNameGenerator(
+                  db.userTable.id, db.classPollTable.userId));
+
+  $$ClassPollTableTableProcessedTableManager get classPollTableRefs {
+    final manager = $$ClassPollTableTableTableManager($_db, $_db.classPollTable)
+        .filter((f) => f.userId.id($_item.id));
+
+    final cache = $_typedResult.readTableOrNull(_classPollTableRefsTable($_db));
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: cache));
+  }
+}
+
 class $$UserTableTableFilterComposer
     extends Composer<_$AppDatabase, $UserTableTable> {
   $$UserTableTableFilterComposer({
@@ -1558,6 +1994,27 @@ class $$UserTableTableFilterComposer
 
   ColumnFilters<int> get roleId => $composableBuilder(
       column: $table.roleId, builder: (column) => ColumnFilters(column));
+
+  Expression<bool> classPollTableRefs(
+      Expression<bool> Function($$ClassPollTableTableFilterComposer f) f) {
+    final $$ClassPollTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.classPollTable,
+        getReferencedColumn: (t) => t.userId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ClassPollTableTableFilterComposer(
+              $db: $db,
+              $table: $db.classPollTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
 }
 
 class $$UserTableTableOrderingComposer
@@ -1602,6 +2059,27 @@ class $$UserTableTableAnnotationComposer
 
   GeneratedColumn<int> get roleId =>
       $composableBuilder(column: $table.roleId, builder: (column) => column);
+
+  Expression<T> classPollTableRefs<T extends Object>(
+      Expression<T> Function($$ClassPollTableTableAnnotationComposer a) f) {
+    final $$ClassPollTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.id,
+        referencedTable: $db.classPollTable,
+        getReferencedColumn: (t) => t.userId,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$ClassPollTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.classPollTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return f(composer);
+  }
 }
 
 class $$UserTableTableTableManager extends RootTableManager<
@@ -1613,9 +2091,9 @@ class $$UserTableTableTableManager extends RootTableManager<
     $$UserTableTableAnnotationComposer,
     $$UserTableTableCreateCompanionBuilder,
     $$UserTableTableUpdateCompanionBuilder,
-    (User, BaseReferences<_$AppDatabase, $UserTableTable, User>),
+    (User, $$UserTableTableReferences),
     User,
-    PrefetchHooks Function()> {
+    PrefetchHooks Function({bool classPollTableRefs})> {
   $$UserTableTableTableManager(_$AppDatabase db, $UserTableTable table)
       : super(TableManagerState(
           db: db,
@@ -1651,9 +2129,36 @@ class $$UserTableTableTableManager extends RootTableManager<
             roleId: roleId,
           ),
           withReferenceMapper: (p0) => p0
-              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .map((e) => (
+                    e.readTable(table),
+                    $$UserTableTableReferences(db, table, e)
+                  ))
               .toList(),
-          prefetchHooksCallback: null,
+          prefetchHooksCallback: ({classPollTableRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [
+                if (classPollTableRefs) db.classPollTable
+              ],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (classPollTableRefs)
+                    await $_getPrefetchedData(
+                        currentTable: table,
+                        referencedTable: $$UserTableTableReferences
+                            ._classPollTableRefsTable(db),
+                        managerFromTypedResult: (p0) =>
+                            $$UserTableTableReferences(db, table, p0)
+                                .classPollTableRefs,
+                        referencedItemsForCurrentItem: (item,
+                                referencedItems) =>
+                            referencedItems.where((e) => e.userId == item.id),
+                        typedResults: items)
+                ];
+              },
+            );
+          },
         ));
 }
 
@@ -1666,9 +2171,9 @@ typedef $$UserTableTableProcessedTableManager = ProcessedTableManager<
     $$UserTableTableAnnotationComposer,
     $$UserTableTableCreateCompanionBuilder,
     $$UserTableTableUpdateCompanionBuilder,
-    (User, BaseReferences<_$AppDatabase, $UserTableTable, User>),
+    (User, $$UserTableTableReferences),
     User,
-    PrefetchHooks Function()>;
+    PrefetchHooks Function({bool classPollTableRefs})>;
 typedef $$RoleTableTableCreateCompanionBuilder = RoleTableCompanion Function({
   Value<int> id,
   required String roleName,
@@ -2040,6 +2545,321 @@ typedef $$RolePermissionTableTableProcessedTableManager = ProcessedTableManager<
     ),
     RolePermission,
     PrefetchHooks Function()>;
+typedef $$ClassPollTableTableCreateCompanionBuilder = ClassPollTableCompanion
+    Function({
+  Value<int> id,
+  required int userId,
+  required double weight,
+  required double height,
+  required String shirtSize,
+  required int shoeSize,
+  required int age,
+  Value<DateTime> createdAt,
+});
+typedef $$ClassPollTableTableUpdateCompanionBuilder = ClassPollTableCompanion
+    Function({
+  Value<int> id,
+  Value<int> userId,
+  Value<double> weight,
+  Value<double> height,
+  Value<String> shirtSize,
+  Value<int> shoeSize,
+  Value<int> age,
+  Value<DateTime> createdAt,
+});
+
+final class $$ClassPollTableTableReferences
+    extends BaseReferences<_$AppDatabase, $ClassPollTableTable, ClassPoll> {
+  $$ClassPollTableTableReferences(
+      super.$_db, super.$_table, super.$_typedResult);
+
+  static $UserTableTable _userIdTable(_$AppDatabase db) =>
+      db.userTable.createAlias(
+          $_aliasNameGenerator(db.classPollTable.userId, db.userTable.id));
+
+  $$UserTableTableProcessedTableManager? get userId {
+    if ($_item.userId == null) return null;
+    final manager = $$UserTableTableTableManager($_db, $_db.userTable)
+        .filter((f) => f.id($_item.userId!));
+    final item = $_typedResult.readTableOrNull(_userIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+        manager.$state.copyWith(prefetchedData: [item]));
+  }
+}
+
+class $$ClassPollTableTableFilterComposer
+    extends Composer<_$AppDatabase, $ClassPollTableTable> {
+  $$ClassPollTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get weight => $composableBuilder(
+      column: $table.weight, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<double> get height => $composableBuilder(
+      column: $table.height, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get shirtSize => $composableBuilder(
+      column: $table.shirtSize, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get shoeSize => $composableBuilder(
+      column: $table.shoeSize, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get age => $composableBuilder(
+      column: $table.age, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnFilters(column));
+
+  $$UserTableTableFilterComposer get userId {
+    final $$UserTableTableFilterComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.userId,
+        referencedTable: $db.userTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$UserTableTableFilterComposer(
+              $db: $db,
+              $table: $db.userTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$ClassPollTableTableOrderingComposer
+    extends Composer<_$AppDatabase, $ClassPollTableTable> {
+  $$ClassPollTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get weight => $composableBuilder(
+      column: $table.weight, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<double> get height => $composableBuilder(
+      column: $table.height, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get shirtSize => $composableBuilder(
+      column: $table.shirtSize, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get shoeSize => $composableBuilder(
+      column: $table.shoeSize, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get age => $composableBuilder(
+      column: $table.age, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createdAt => $composableBuilder(
+      column: $table.createdAt, builder: (column) => ColumnOrderings(column));
+
+  $$UserTableTableOrderingComposer get userId {
+    final $$UserTableTableOrderingComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.userId,
+        referencedTable: $db.userTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$UserTableTableOrderingComposer(
+              $db: $db,
+              $table: $db.userTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$ClassPollTableTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ClassPollTableTable> {
+  $$ClassPollTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<double> get weight =>
+      $composableBuilder(column: $table.weight, builder: (column) => column);
+
+  GeneratedColumn<double> get height =>
+      $composableBuilder(column: $table.height, builder: (column) => column);
+
+  GeneratedColumn<String> get shirtSize =>
+      $composableBuilder(column: $table.shirtSize, builder: (column) => column);
+
+  GeneratedColumn<int> get shoeSize =>
+      $composableBuilder(column: $table.shoeSize, builder: (column) => column);
+
+  GeneratedColumn<int> get age =>
+      $composableBuilder(column: $table.age, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createdAt =>
+      $composableBuilder(column: $table.createdAt, builder: (column) => column);
+
+  $$UserTableTableAnnotationComposer get userId {
+    final $$UserTableTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.userId,
+        referencedTable: $db.userTable,
+        getReferencedColumn: (t) => t.id,
+        builder: (joinBuilder,
+                {$addJoinBuilderToRootComposer,
+                $removeJoinBuilderFromRootComposer}) =>
+            $$UserTableTableAnnotationComposer(
+              $db: $db,
+              $table: $db.userTable,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer:
+                  $removeJoinBuilderFromRootComposer,
+            ));
+    return composer;
+  }
+}
+
+class $$ClassPollTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $ClassPollTableTable,
+    ClassPoll,
+    $$ClassPollTableTableFilterComposer,
+    $$ClassPollTableTableOrderingComposer,
+    $$ClassPollTableTableAnnotationComposer,
+    $$ClassPollTableTableCreateCompanionBuilder,
+    $$ClassPollTableTableUpdateCompanionBuilder,
+    (ClassPoll, $$ClassPollTableTableReferences),
+    ClassPoll,
+    PrefetchHooks Function({bool userId})> {
+  $$ClassPollTableTableTableManager(
+      _$AppDatabase db, $ClassPollTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ClassPollTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ClassPollTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ClassPollTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            Value<int> userId = const Value.absent(),
+            Value<double> weight = const Value.absent(),
+            Value<double> height = const Value.absent(),
+            Value<String> shirtSize = const Value.absent(),
+            Value<int> shoeSize = const Value.absent(),
+            Value<int> age = const Value.absent(),
+            Value<DateTime> createdAt = const Value.absent(),
+          }) =>
+              ClassPollTableCompanion(
+            id: id,
+            userId: userId,
+            weight: weight,
+            height: height,
+            shirtSize: shirtSize,
+            shoeSize: shoeSize,
+            age: age,
+            createdAt: createdAt,
+          ),
+          createCompanionCallback: ({
+            Value<int> id = const Value.absent(),
+            required int userId,
+            required double weight,
+            required double height,
+            required String shirtSize,
+            required int shoeSize,
+            required int age,
+            Value<DateTime> createdAt = const Value.absent(),
+          }) =>
+              ClassPollTableCompanion.insert(
+            id: id,
+            userId: userId,
+            weight: weight,
+            height: height,
+            shirtSize: shirtSize,
+            shoeSize: shoeSize,
+            age: age,
+            createdAt: createdAt,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (
+                    e.readTable(table),
+                    $$ClassPollTableTableReferences(db, table, e)
+                  ))
+              .toList(),
+          prefetchHooksCallback: ({userId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins: <
+                  T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic>>(state) {
+                if (userId) {
+                  state = state.withJoin(
+                    currentTable: table,
+                    currentColumn: table.userId,
+                    referencedTable:
+                        $$ClassPollTableTableReferences._userIdTable(db),
+                    referencedColumn:
+                        $$ClassPollTableTableReferences._userIdTable(db).id,
+                  ) as T;
+                }
+
+                return state;
+              },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ));
+}
+
+typedef $$ClassPollTableTableProcessedTableManager = ProcessedTableManager<
+    _$AppDatabase,
+    $ClassPollTableTable,
+    ClassPoll,
+    $$ClassPollTableTableFilterComposer,
+    $$ClassPollTableTableOrderingComposer,
+    $$ClassPollTableTableAnnotationComposer,
+    $$ClassPollTableTableCreateCompanionBuilder,
+    $$ClassPollTableTableUpdateCompanionBuilder,
+    (ClassPoll, $$ClassPollTableTableReferences),
+    ClassPoll,
+    PrefetchHooks Function({bool userId})>;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -2054,4 +2874,6 @@ class $AppDatabaseManager {
       $$PermissionTableTableTableManager(_db, _db.permissionTable);
   $$RolePermissionTableTableTableManager get rolePermissionTable =>
       $$RolePermissionTableTableTableManager(_db, _db.rolePermissionTable);
+  $$ClassPollTableTableTableManager get classPollTable =>
+      $$ClassPollTableTableTableManager(_db, _db.classPollTable);
 }

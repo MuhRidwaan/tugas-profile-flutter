@@ -3,7 +3,9 @@ import 'package:provider/provider.dart';
 import '../../providers/auth_provider.dart';
 import '../explore_page.dart';
 import '../profile_list.dart';
-
+import 'dashboard_charts.dart';
+import 'class_poll_form_page.dart';
+import '../../providers/class_poll_provider.dart';
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
@@ -59,6 +61,20 @@ class DashboardPage extends StatelessWidget {
             _buildSectionTitle('Akses Cepat'),
             const SizedBox(height: 12),
             _buildQuickActions(context, authProvider),
+            const SizedBox(height: 24),
+            _buildSectionTitle('Statistik Kelas'),
+            const SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Consumer<ClassPollProvider>(
+                builder: (context, pollProvider, child) {
+                  if (pollProvider.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return DashboardCharts(data: pollProvider.allData);
+                },
+              ),
+            ),
             const SizedBox(height: 32),
           ],
         ),

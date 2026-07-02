@@ -66,23 +66,34 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(
-                      Icons.lock_person,
-                      size: 64,
-                      color: Color(0xFF1565C0),
+                    Image.asset(
+                      'assets/images/icon.png',
+                      width: 80,
+                      height: 80,
                     ),
                     const SizedBox(height: 16),
                     const Text(
-                      'Selamat Datang',
+                      'OmniHub',
                       style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w900,
+                        color: Color(0xFF1565C0),
                       ),
                     ),
                     const SizedBox(height: 8),
                     const Text(
+                      'The All-in-One Interactive\nLearning & Utility Toolkit',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    const Text(
                       'Silakan login untuk melanjutkan',
-                      style: TextStyle(color: Colors.grey),
+                      style: TextStyle(color: Colors.grey, fontSize: 13),
                     ),
                     const SizedBox(height: 32),
                     TextField(

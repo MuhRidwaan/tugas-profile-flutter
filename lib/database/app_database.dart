@@ -8,17 +8,18 @@ import 'tables/user_table.dart';
 import 'tables/role_table.dart';
 import 'tables/permission_table.dart';
 import 'tables/role_permission_table.dart';
+import 'tables/class_poll_table.dart';
 
 part 'app_database.g.dart';
 
-@DriftDatabase(tables: [ZodiacTable, UserTable, RoleTable, PermissionTable, RolePermissionTable])
+@DriftDatabase(tables: [ZodiacTable, UserTable, RoleTable, PermissionTable, RolePermissionTable, ClassPollTable])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   AppDatabase.forTesting(QueryExecutor executor) : super(executor);
 
   @override
-  int get schemaVersion => 3;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -37,6 +38,9 @@ class AppDatabase extends _$AppDatabase {
           }
           if (from < 3) {
             await _insertExplorePermissions();
+          }
+          if (from < 4) {
+            await m.createTable(classPollTable);
           }
         },
       );

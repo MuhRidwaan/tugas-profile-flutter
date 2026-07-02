@@ -15,6 +15,8 @@ import 'repositories/quiz_repository.dart';
 import 'repositories/auth_repository.dart';
 import 'repositories/role_repository.dart';
 import 'repositories/user_repository.dart';
+import 'repositories/class_poll_repository.dart';
+import 'providers/class_poll_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +45,9 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) => UserProvider(userRepository),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ClassPollProvider(ClassPollRepository(db))..loadAllData(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -57,7 +62,7 @@ class MyApp extends StatelessWidget {
     return Consumer<AuthProvider>(
       builder: (context, auth, child) {
         return MaterialApp(
-          title: 'MiniProject',
+          title: 'OmniHub',
           home: auth.isAuthenticated ? const MainScreen() : const LoginPage(),
           debugShowCheckedModeBanner: false,
         );
