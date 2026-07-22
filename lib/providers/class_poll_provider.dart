@@ -20,7 +20,7 @@ class ClassPollProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
     try {
-      _allData = []; // Bersihkan data agar selalu memakai data random tiap dipanggil
+      _allData = [];
       final rand = _math.Random();
       final sizes = ['S', 'M', 'L', 'XL', 'XXL'];
       
