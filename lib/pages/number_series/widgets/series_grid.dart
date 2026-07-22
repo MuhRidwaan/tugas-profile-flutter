@@ -55,7 +55,7 @@ class _SeriesCell extends StatelessWidget {
       label: 'Angka ke-${item.index}: ${item.value}',
       child: Container(
         decoration: BoxDecoration(
-          color: themeColor.withOpacity(0.1),
+          color: themeColor.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(12),
         ),
         padding: const EdgeInsets.all(8),

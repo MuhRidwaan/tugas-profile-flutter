@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../database/app_database.dart';
 import '../../../services/zodiac_service.dart';
 import '../../../validators/input_validator.dart';
 import '../../../models/zodiac_query_result.dart';
@@ -138,7 +137,7 @@ class _QueryByDateTabState extends State<QueryByDateTab> with AutomaticKeepAlive
                       Expanded(
                         child: DropdownButtonFormField<int>(
                           key: const Key('day-dropdown'),
-                          value: _selectedDay,
+                          initialValue: _selectedDay,
                           hint: const Text('Tanggal'),
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
@@ -164,7 +163,7 @@ class _QueryByDateTabState extends State<QueryByDateTab> with AutomaticKeepAlive
                       Expanded(
                         child: DropdownButtonFormField<int>(
                           key: const Key('month-dropdown'),
-                          value: _selectedMonth,
+                          initialValue: _selectedMonth,
                           hint: const Text('Bulan'),
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
@@ -216,9 +215,9 @@ class _QueryByDateTabState extends State<QueryByDateTab> with AutomaticKeepAlive
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: ZodiacConstants.errorColor.withOpacity(0.08),
+                color: ZodiacConstants.errorColor.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: ZodiacConstants.errorColor.withOpacity(0.3)),
+                border: Border.all(color: ZodiacConstants.errorColor.withValues(alpha: 0.3)),
               ),
               child: Row(
                 children: [

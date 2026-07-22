@@ -219,7 +219,7 @@ class _AnimatedSortingVisualizerState extends State<AnimatedSortingVisualizer> {
             gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [color, color.withOpacity(0.7)],
+              colors: [color, color.withValues(alpha: 0.7)],
             ),
           ),
         ),
@@ -297,7 +297,7 @@ class _AnimatedSortingVisualizerState extends State<AnimatedSortingVisualizer> {
                             decoration: InputDecoration(
                               hintText: '${index + 1}',
                               filled: true,
-                              fillColor: color.withOpacity(0.05),
+                              fillColor: color.withValues(alpha: 0.05),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(color: color),
@@ -305,13 +305,13 @@ class _AnimatedSortingVisualizerState extends State<AnimatedSortingVisualizer> {
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(
-                                  color: color.withOpacity(0.3),
+                                  color: color.withValues(alpha: 0.3),
                                 ),
                               ),
                               disabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                                 borderSide: BorderSide(
-                                  color: Colors.grey.withOpacity(0.3),
+                                  color: Colors.grey.withValues(alpha: 0.3),
                                 ),
                               ),
                               focusedBorder: OutlineInputBorder(
@@ -437,7 +437,7 @@ class _AnimatedSortingVisualizerState extends State<AnimatedSortingVisualizer> {
                         LinearProgressIndicator(
                           value:
                               _totalSteps > 0 ? _currentStep / _totalSteps : 0,
-                          backgroundColor: color.withOpacity(0.2),
+                          backgroundColor: color.withValues(alpha: 0.2),
                           valueColor: AlwaysStoppedAnimation<Color>(color),
                           minHeight: 8,
                           borderRadius: BorderRadius.circular(4),
@@ -612,7 +612,7 @@ class _OrderOption extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: isSelected
-              ? color.withOpacity(enabled ? 0.1 : 0.05)
+              ? color.withValues(alpha: enabled ? 0.1 : 0.05)
               : Colors.grey[100],
           border: Border.all(
             color: isSelected
@@ -643,7 +643,7 @@ class _OrderOption extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 color: isSelected && enabled
-                    ? color.withOpacity(0.7)
+                    ? color.withValues(alpha: 0.7)
                     : Colors.grey,
               ),
             ),
@@ -685,7 +685,7 @@ class _AnimationCard extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: [
               Colors.white,
-              color.withOpacity(0.05),
+              color.withValues(alpha: 0.05),
             ],
           ),
         ),
@@ -730,7 +730,7 @@ class _AnimationCard extends StatelessWidget {
                     vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: itemColor.withOpacity(0.15),
+                    color: itemColor.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: itemColor,
@@ -772,7 +772,7 @@ class _LegendItem extends StatelessWidget {
           width: 24,
           height: 24,
           decoration: BoxDecoration(
-            color: color.withOpacity(0.15),
+            color: color.withValues(alpha: 0.15),
             border: Border.all(color: color, width: 2),
             borderRadius: BorderRadius.circular(4),
           ),

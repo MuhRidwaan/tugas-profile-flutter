@@ -244,7 +244,7 @@ class _NestedIfDiscountPageState extends State<NestedIfDiscountPage> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: const Color(0xFF7B1FA2).withOpacity(0.3),
+          color: const Color(0xFF7B1FA2).withValues(alpha: 0.3),
           width: 1,
         ),
       ),

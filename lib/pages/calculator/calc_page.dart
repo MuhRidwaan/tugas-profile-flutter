@@ -154,7 +154,7 @@ class _CalcPageState extends State<CalcPage> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: _accentPurple.withOpacity(0.12),
+                        color: _accentPurple.withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child:
@@ -199,7 +199,7 @@ class _CalcPageState extends State<CalcPage> {
                   child: Column(
                     children: [
                       DropdownButtonFormField<String>(
-                        value: selectedRumus,
+                        initialValue: selectedRumus,
                         decoration: InputDecoration(
                           labelText: 'Pilih rumus',
                           filled: true,

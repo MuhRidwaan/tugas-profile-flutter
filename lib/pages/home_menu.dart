@@ -29,9 +29,9 @@ class HomeMenu extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.15),
+                    color: Colors.white.withValues(alpha: 0.15),
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white.withOpacity(0.3), width: 2),
+                    border: Border.all(color: Colors.white.withValues(alpha: 0.3), width: 2),
                   ),
                   child: const Icon(
                     Icons.attach_money,
@@ -126,7 +126,7 @@ class HomeMenu extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: color1.withOpacity(0.4),
+              color: color1.withValues(alpha: 0.4),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),

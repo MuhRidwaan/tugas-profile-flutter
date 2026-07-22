@@ -97,7 +97,7 @@ class _EvenSeriesPageState extends State<EvenSeriesPage> {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF00838F).withOpacity(0.15),
+                  color: const Color(0xFF00838F).withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Text(

@@ -44,7 +44,7 @@ class DescriptionSection extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: ZodiacConstants.primaryColor.withOpacity(0.08),
+                    color: ZodiacConstants.primaryColor.withValues(alpha: 0.08),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(

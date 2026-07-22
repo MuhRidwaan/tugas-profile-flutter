@@ -109,7 +109,7 @@ class PollOptionCard extends StatelessWidget {
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: _accentPurple.withOpacity(0.15),
+                    color: _accentPurple.withValues(alpha: 0.15),
                     blurRadius: 6,
                     offset: const Offset(0, 2),
                   ),
@@ -122,8 +122,8 @@ class PollOptionCard extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(12),
             onTap: isDisabled ? null : onTap,
-            splashColor: _accentPurple.withOpacity(0.12),
-            highlightColor: _accentPurple.withOpacity(0.06),
+            splashColor: _accentPurple.withValues(alpha: 0.12),
+            highlightColor: _accentPurple.withValues(alpha: 0.06),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 16,

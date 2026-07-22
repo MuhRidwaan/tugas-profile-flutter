@@ -256,7 +256,7 @@ class _SwitchCaseDiscountPageState extends State<SwitchCaseDiscountPage> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: const Color(0xFFFF6F00).withOpacity(0.3),
+          color: const Color(0xFFFF6F00).withValues(alpha: 0.3),
           width: 1,
         ),
       ),

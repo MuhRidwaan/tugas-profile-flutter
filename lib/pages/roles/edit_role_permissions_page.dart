@@ -118,7 +118,7 @@ class _EditRolePermissionsPageState extends State<EditRolePermissionsPage> {
                       Container(
                         padding: const EdgeInsets.all(16),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF1565C0).withOpacity(0.1),
+                          color: const Color(0xFF1565C0).withValues(alpha: 0.1),
                           shape: BoxShape.circle,
                         ),
                         child: const Icon(
@@ -189,8 +189,8 @@ class _EditRolePermissionsPageState extends State<EditRolePermissionsPage> {
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                   color: isSelected 
-                                      ? const Color(0xFF1565C0).withOpacity(0.1)
-                                      : Colors.grey.withOpacity(0.1),
+                                      ? const Color(0xFF1565C0).withValues(alpha: 0.1)
+                                      : Colors.grey.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Icon(

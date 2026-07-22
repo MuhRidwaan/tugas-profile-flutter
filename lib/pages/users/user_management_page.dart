@@ -46,7 +46,7 @@ class _UserManagementPageState extends State<UserManagementPage> {
                     obscureText: true,
                   ),
                   DropdownButtonFormField<int>(
-                    value: selectedRoleId,
+                    initialValue: selectedRoleId,
                     decoration: const InputDecoration(labelText: 'Role'),
                     items: roles.map((r) => DropdownMenuItem(
                       value: r.id,

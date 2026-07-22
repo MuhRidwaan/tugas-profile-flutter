@@ -180,7 +180,7 @@ class _FeedbackWidgetState extends State<FeedbackWidget>
           style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w600,
-            color: color.withOpacity(0.8),
+            color: color.withValues(alpha: 0.8),
           ),
         ),
         const SizedBox(height: 3),

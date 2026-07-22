@@ -107,7 +107,7 @@ class DashboardPage extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 36,
-                backgroundColor: const Color(0xFF1565C0).withOpacity(0.1),
+                backgroundColor: const Color(0xFF1565C0).withValues(alpha: 0.1),
                 child: const Icon(
                   Icons.person,
                   size: 40,
@@ -142,7 +142,7 @@ class DashboardPage extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF7B1FA2).withOpacity(0.1),
+                        color: const Color(0xFF7B1FA2).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -229,12 +229,12 @@ class DashboardPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: color.withOpacity(0.1),
+            color: color.withValues(alpha: 0.1),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
         ],
-        border: Border.all(color: color.withOpacity(0.2), width: 1),
+        border: Border.all(color: color.withValues(alpha: 0.2), width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,7 +242,7 @@ class DashboardPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: color, size: 28),
@@ -321,7 +321,7 @@ class DashboardPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -333,7 +333,7 @@ class DashboardPage extends StatelessWidget {
               width: 54,
               height: 54,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Icon(icon, color: color, size: 28),

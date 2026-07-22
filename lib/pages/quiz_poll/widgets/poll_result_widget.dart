@@ -209,7 +209,7 @@ class _PollResultWidgetState extends State<PollResultWidget>
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: _accentPurple.withOpacity(0.15),
+              color: _accentPurple.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(6),
             ),
             child: const Row(
@@ -257,7 +257,7 @@ class _PollResultWidgetState extends State<PollResultWidget>
               width: (animatedPercentage / 100) * 300, // Max width ~300
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [_primaryBlue, _primaryBlue.withOpacity(0.7)],
+                  colors: [_primaryBlue, _primaryBlue.withValues(alpha: 0.7)],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                 ),

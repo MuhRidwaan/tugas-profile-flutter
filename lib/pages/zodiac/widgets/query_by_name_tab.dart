@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../database/app_database.dart';
 import '../../../services/zodiac_service.dart';
 import '../../../validators/input_validator.dart';
 import '../../../models/zodiac_query_result.dart';
@@ -142,9 +141,9 @@ class _QueryByNameTabState extends State<QueryByNameTab> with AutomaticKeepAlive
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: ZodiacConstants.errorColor.withOpacity(0.08),
+                color: ZodiacConstants.errorColor.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: ZodiacConstants.errorColor.withOpacity(0.3)),
+                border: Border.all(color: ZodiacConstants.errorColor.withValues(alpha: 0.3)),
               ),
               child: Row(
                 children: [
